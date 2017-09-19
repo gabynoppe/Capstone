@@ -1,0 +1,215 @@
+
+<head>
+  <title>FunCity</title>
+  <style>
+
+a.a1:hover {
+    color: #008000;
+}
+a.a1
+{
+color: #00cc00;
+}
+
+a.a2:hover {
+    color: #999900;
+}
+a.a2
+{
+color: #ffff1a;
+}
+
+a.a3:hover {
+    color: #004080;
+}
+a.a3
+{
+color: #1a8cff;
+}
+
+a.a4:hover {
+    color: #4d004d;
+}
+a.a4
+{
+color:  #b300b3;
+}
+
+a.a5:hover {
+    color: #b32400;
+}
+a.a5
+{
+color: #ff5c33;
+}
+
+a.a6:hover {
+    color: #00997a;
+}
+a.a6
+{
+color:  #00e6b8;
+}
+
+
+</style>
+</head>
+
+<body style =  "background-color:#29293d; padding-top: 50px;">
+
+</body>
+
+<template name = "ApplicationLayout">
+ {{> yield "navbar"}}
+   {{> yield "title"}}
+  {{> yield "main"}}
+  
+</template>
+
+<template name = "categories">
+<div class = "container container-fluid;">
+
+	<div class = "row" style = "padding-left: 3%; padding-top:10%;"> 
+		<a href="/odcat" class = "a1"><div class = "col-md-3" style = "height: 10vw;">
+			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Outdoors</p>
+			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+		<a href="/encat" class = "a2"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+			<p style = "text-align:center ; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Entertainment</p>
+			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-star" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+		<a href="/clcat" class = "a3"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+		<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Cultural/learning</p>
+		 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-globe" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+	</div>
+	
+	<div class = "row">
+	&emsp;&emsp;
+	</div>
+	
+	<div class = "row" style = "padding-left: 3%; padding-top:10%;">
+		<a href="/gfcat" class = "a4"><div class = "col-md-3" style = " height: 10vw;">
+			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Group fun</p>
+			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-user" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+		<a href="/fcat" class = "a5"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Food</p>
+			<div style = "text-align: center;"> <span class= "glyphicon glyphicon-cutlery" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+	<a href="/otcat" class = "a6">	<div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Other</p>
+			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-asterisk" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+		</div></a>
+	</div>
+</div>
+</template>
+
+
+<template name = "welcome">
+	<div class = "container">	
+		<div class = "jumbotron">
+			<h1 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Welcome To FunCity {{username}}</h1>
+		</div>
+	</div>
+</template>
+
+
+
+<template name = "navbar">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+     <li class="active"> <a class="navbar-brand" href="/"  style = " font-size: 1.5vw; ">FunCity</a></li>
+    </div>
+    <ul class="nav navbar-nav">
+    
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style = "padding-right:10%">
+      <li><a href="#">{{>loginButtons}}<span class="glyphicon glyphicon-user" style = " font-size: 1vw; "></span> </a></li>
+  
+    </ul>
+  </div>
+</nav>
+</template>
+
+<template name = "odcat">
+	
+<!-- 	{{#each outdoorideas}}
+  	<h3 style = "color:white">Title: {{idea_title}}</h3>
+    <p style = "color:white"> Description: {{idea_desc}}</p>
+	{{/each}} -->
+	{{>idealist}}
+	{{>addideaform}} 
+  
+</template>
+
+<template name = "encat">
+	<div class = "container container-fluid;" style = "background-color: #ffff1a"> 
+	</div>
+</template>
+
+<template name = "clcat">
+	<div class = "container container-fluid;" style = "background-color: #1a8cff"> 
+	</div>
+</template>
+
+<template name = "gfcat">
+	<div class = "container container-fluid;" style = "background-color: #b300b3"> 
+	</div>
+</template>
+
+<template name = "fcat">
+	<div class = "container container-fluid;" style = "background-color: #ff5c33"> 
+	</div>
+</template>
+
+<template name = "otcat">
+	<div class = "container container-fluid;" style = "background-color: #00e6b8"> 
+	</div>
+</template>
+
+
+<template name = "idea">
+
+	{{#each outdoorideas}}<!-- if you take away the {{Each}} then it doesnt render the title and desc-->
+	<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h1>
+	<h4 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">  {{idea_desc}}</h4><br>
+	{{/each}}
+	<div>
+		<a href = "/odcat"><button class = "btn btn-success"> back to ideas</button></a>
+	</div>
+</template>
+
+<template name = "addideaform">
+<div>
+	<form class = "js-add-idea" style = "padding-bottom:10%; padding-left:5%;text-align: center;">
+		<p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 2vw;">Add an Idea:</p>
+		<p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Title: </p><input type = "text" name = "idea_title" style = "width:15%"/> <br><br>
+		<p style = "color: white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Description: </p><input type = "text" name = "idea_desc" style = "width:30%; height; 25%;"/>
+		<button class = "btn btn-success "> Save </button>
+	</form>
+	</div>
+</template>
+
+<template name = "idealist">
+	{{#each outdoorideas}} 
+		<div id = "{{_id}}">
+			<a href = "/idea/{{_id}}"><h2 style = "color:white; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h2></a>
+			<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{idea_desc}}</h4><br><br>
+		</div>
+	{{/each}}
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
