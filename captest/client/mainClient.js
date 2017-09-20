@@ -22,7 +22,7 @@ import './main.html';
 
 }) */
 
-
+var myId; // global id variable used to get each idea loaded for its own page
 	
 	///routing
 	Router.configure({
@@ -100,8 +100,8 @@ import './main.html';
 		this.render('idea', {
 			to: "main",
 			data: function(){
-				
-				return OutdoorIdeas.findOne({id:this.params._id});
+				 myId = this.params._id; 
+				return OutdoorIdeas.findOne({_id:this.params._id});
 			}
 		});			
 	});
@@ -110,9 +110,11 @@ import './main.html';
    //Template.addideaform.helpers({outdoorideas:idea_title});
 	Template.idea.helpers({ // edit this ? to make idea route render the correct idea values
   outdoorideas: function() {
-	  //return OutdoorIdeas.findOne({_id:_id});
+	     
+ var test = OutdoorIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+	// return test;
 	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    return OutdoorIdeas.find();
+    //return OutdoorIdeas.find();
   },
   columns: function() {
 

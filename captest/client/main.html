@@ -172,10 +172,13 @@ color:  #00e6b8;
 
 <template name = "idea">
 
-	{{#each outdoorideas}}<!-- if you take away the {{Each}} then it doesnt render the title and desc-->
-	<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h1>
+	
+	<div id = "{{_id}}"> 
+	 <h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h1>
 	<h4 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">  {{idea_desc}}</h4><br>
-	{{/each}}
+	</div>
+
+
 	<div>
 		<a href = "/odcat"><button class = "btn btn-success"> back to ideas</button></a>
 	</div>
