@@ -139,9 +139,42 @@ color:  #00e6b8;
   	<h3 style = "color:white">Title: {{idea_title}}</h3>
     <p style = "color:white"> Description: {{idea_desc}}</p>
 	{{/each}} -->
-	{{>idealist}}
-	{{>addideaform}} 
-  
+	<div class="container" style = "width: 100vw; padding: none; margin: 0; ">
+  <div class="panel panel-default" style = "  background-color: transparent; border: none;">
+    <div class="panel-heading" style = "  background-color: transparent; border: none;">
+		 <div class="row">
+					 <div class="col-xs-1  " style="height: 40px; padding: 4px 0px 0px 0px;margin-left: 40%;">
+								<div>
+                                    <span>
+                                        <i class="glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " float:left; postion:relative; font-size: 2.5vw; color:#00cc00 "></i>
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="col-xs-10 col-xs-offset-1" style="padding:0px 0px 0px 0px; margin-left: -41%;">
+                                <!-- note: 'autofocus' might not be supported in all browsers... sets the focus on the message bar as soon as page loads -->
+                                <p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 2vw;">Outdoors</p>
+                            </div>
+                            <div class="col-xs-1  " style="height: 40px; padding: 4px 0px 0px 0px;margin-left: -35%;">
+								<div>
+                                    <span>
+                                        <i class="glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " float:left; postion:relative; font-size: 2.5vw; color:#00cc00 "></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+	
+	
+		<!-- <div><p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 2vw;">Outdoors</p> -->
+		 <!-- <span class= "glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " float:left; postion:relative;font-size: 2.5vw; "></span></div> -->
+	</div>
+    <div class="panel-body" style = "  background-color: transparent; min-height:55vh; max-height:55vh; overflow: auto; border:none">{{>idealist}}</div>
+    <div class="panel-footer" style = "  background-color: transparent;padding-bottom:none; border: none; margin-left:-7.5%">{{>addideaform}} </div>
+  </div>
+</div>
+
+	
+
 </template>
 
 <template name = "encat">
@@ -186,7 +219,7 @@ color:  #00e6b8;
 
 <template name = "addideaform">
 <div>
-	<form class = "js-add-idea" style = "padding-bottom:10%; padding-left:5%;text-align: center;">
+	<form class = "js-add-idea" style = "padding-bottom:none; padding-left:5%;text-align: center;">
 		<p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 2vw;">Add an Idea:</p>
 		<p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Title: </p><input type = "text" name = "idea_title" style = "width:15%"/> <br><br>
 		<p style = "color: white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Description: </p><input type = "text" name = "idea_desc" style = "width:30%; height; 25%;"/>
