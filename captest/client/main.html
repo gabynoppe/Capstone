@@ -51,7 +51,6 @@ a.a6
 color:  #00e6b8;
 }
 
-
 </style>
 </head>
 
@@ -62,6 +61,8 @@ color:  #00e6b8;
 
 
 
+<!-- TO HELP WITH THE ROUTING>>>> CAN RENDER MULTIPLE TEMPLATES PER PAGE -->
+
 <template name = "ApplicationLayout">
  {{> yield "navbar"}}
    {{> yield "title"}}
@@ -69,72 +70,108 @@ color:  #00e6b8;
   
 </template>
 
+
+
+
+
+<!-- THESE ARE FOR EACH CATEGORY THE USER CAN CHOOSE AND CLICK ON THE HOME PAGE -->
+
 <template name = "categories">
-<div class = "container container-fluid;">
+	<div class = "container container-fluid;" style = "padding-top:5%">
+		<div class = "row" style = "padding-left: 3%;"> 
+		
+			
+				<a href="/odcat" class = "a1">
+					<div class = "col-md-3" style = "height: 10vw; ">
+						<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Outdoors</p>
+							<div style = "text-align: center;"> <span class= "glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " font-size: 8vw; "></span> 
+							</div>
+					</div>
+				</a>
+			
+			
+			
+				<a href="/encat" class = "a2">
+					<div class = "col-md-3 col-md-offset-1" style = "height: 10vw; ">
+						<p style = "text-align:center ; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw; ">Entertainment</p>
+						<div style = "text-align: center;"> <span class= "glyphicon glyphicon-star" aria-hidden="true" style = " font-size: 8vw; "></span> 
+						</div>
+					</div>
+				</a>			
+			
+			
+			
+				<a href="/clcat" class = "a3">
+				<div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+					<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Cultural/Learning</p>
+					<div style = "text-align: center;"> <span class= "glyphicon glyphicon-globe" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
+					</div>
+				</a>
+			
+		</div>
 
-	<div class = "row" style = "padding-left: 3%; padding-top:10%;"> 
-		<a href="/odcat" class = "a1"><div class = "col-md-3" style = "height: 10vw;">
-			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Outdoors</p>
-			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-tree-deciduous" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-		<a href="/encat" class = "a2"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
-			<p style = "text-align:center ; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Entertainment</p>
-			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-star" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-		<a href="/clcat" class = "a3"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
-		<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Cultural/learning</p>
-		 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-globe" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-	</div>
-	
-	<div class = "row">
-	&emsp;&emsp;
-	</div>
-	
-	<div class = "row" style = "padding-left: 3%; padding-top:10%;">
-		<a href="/gfcat" class = "a4"><div class = "col-md-3" style = " height: 10vw;">
-			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Group fun</p>
-			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-user" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-		<a href="/fcat" class = "a5"><div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
-			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Food</p>
-			<div style = "text-align: center;"> <span class= "glyphicon glyphicon-cutlery" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-	<a href="/otcat" class = "a6">	<div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
-			<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Other</p>
-			 <div style = "text-align: center;"> <span class= "glyphicon glyphicon-asterisk" aria-hidden="true" style = " font-size: 8vw; "></span> </div>
-		</div></a>
-	</div>
-</div>
-</template>
-
-
-<template name = "welcome">
-	<div class = "container">	
-		<div class = "jumbotron">
-			<h1 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Welcome To FunCity {{username}}</h1>
+        
+		<div class = "row" style = "padding-left: 3%; padding-top:5%;">
+			
+			<a href="/gfcat" class = "a4">
+				<div class = "col-md-3" style = " height: 10vw;">
+					<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Group fun</p>
+					<div style = "text-align: center;"> <span class= "glyphicon glyphicon-user" aria-hidden="true" style = " font-size: 8vw; "></span>
+					</div>
+				</div>
+			</a>
+		
+			<a href="/fcat" class = "a5">
+				<div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+					<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Food</p>
+					<div style = "text-align: center;"> <span class= "glyphicon glyphicon-cutlery" aria-hidden="true" style = " font-size: 8vw; "></span> 
+					</div>
+				</div>
+			</a>
+			
+			<a href="/otcat" class = "a6">	
+				<div class = "col-md-3 col-md-offset-1" style = "height: 10vw;">
+					<p style = "text-align:center; color: white; font-family: Courier New, Courier, monospace; font-size: 1.2vw;">Other</p>
+					<div style = "text-align: center;"> <span class= "glyphicon glyphicon-asterisk" aria-hidden="true" style = " font-size: 8vw; "></span> 
+					</div>
+				</div>
+			</a>
 		</div>
 	</div>
 </template>
 
 
 
-<template name = "navbar">
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-     <li class="active"> <a class="navbar-brand" href="/"  style = " font-size: 1.5vw; ">FunCity</a></li>
-    </div>
-    <ul class="nav navbar-nav">
-    
-    </ul>
-    <ul class="nav navbar-nav navbar-right" style = "padding-right:0%">
-      <li style = "padding-right:0%" ><a href="#">{{>loginButtons}}<span class="glyphicon glyphicon-user" style = " font-size: 1vw; "></span> </a></li>
-	  <li style = "padding-left:15%; padding-right:15%"><a href="{{profile}}">Profile</a></li>
-    </ul>
-  </div>
-</nav>
+
+<template name = "welcome">
+	<div class = "container">	
+		<div class = "jumbotron">
+			<h1 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Welcome To FunCity</h1>  <!--CAN ADD USER NAME HERE TO PERSONALIZE-->
+			<h3 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Click on a category to start browsing ideas!</h3>
+		</div>
+	</div>
 </template>
+
+
+
+
+
+<template name = "navbar">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<li class="active"> <a class="navbar-brand" href="/"  style = " font-size: 1.5vw; ">FunCity</a></li>
+			</div>
+			<ul class="nav navbar-nav"></ul>
+			<ul class="nav navbar-nav navbar-right" style = "padding-right:0%">
+				<li style = "padding-right:0%" ><a href="#">{{>loginButtons}}<span class="glyphicon glyphicon-user" style = " font-size: 1vw; "></span> </a></li>
+				<li style = "padding-left:15%; padding-right:15%"><a href="{{profile}}" id = "profilelink" class = "signinalert" >Profile</a></li>
+			</ul>
+		</div>
+	</nav>
+</template>
+
+
 
 
 <!-- OUTDOOR IDEAS TEMPLATE -->
@@ -168,7 +205,17 @@ color:  #00e6b8;
 </div>
 </template>
 
-<!-- ENTERTAINMENT IDEAS TEMPLATE -->
+
+
+
+
+
+<!-- STILL NEED TO FINISH THESE OTHER CATEGORIES -->
+
+
+
+
+<!-- ENTERTAINMENT IDEAS TEMPLATE  -->
 <template name = "encat">
 <div class="container" style = "width: 100vw; padding: none; margin: 0; ">
   <div class="panel panel-default" style = "  background-color: transparent; border: none;">
@@ -199,7 +246,11 @@ color:  #00e6b8;
 </div>
 </template>
 
-<!-- CULTURAL/LEARNING IDEAS TEMPLATE -->
+
+
+
+
+<!-- CULTURAL/LEARNING IDEAS TEMPLATE  -->
 <template name = "clcat">
 <div class="container" style = "width: 100vw; padding: none; margin: 0; ">
   <div class="panel panel-default" style = "  background-color: transparent; border: none;">
@@ -230,7 +281,11 @@ color:  #00e6b8;
 </div>
 </template>
 
-<!-- GROUP IDEAS TEMPLATE -->
+
+
+
+
+<!-- GROUP IDEAS TEMPLATE  -->
 <template name = "gfcat">
 <div class="container" style = "width: 100vw; padding: none; margin: 0; ">
   <div class="panel panel-default" style = "  background-color: transparent; border: none;">
@@ -261,7 +316,11 @@ color:  #00e6b8;
 </div>
 </template>
 
-<!-- FOOD IDEAS TEMPLATE -->
+
+
+
+
+<!-- FOOD IDEAS TEMPLATE  -->
 <template name = "fcat">
 <div class="container" style = "width: 100vw; padding: none; margin: 0; ">
   <div class="panel panel-default" style = "  background-color: transparent; border: none;">
@@ -292,7 +351,11 @@ color:  #00e6b8;
 </div>
 </template>
 
-<!-- OTHER IDEAS TEMPLATE -->
+
+
+
+
+<!-- OTHER IDEAS TEMPLATE  -->
 <template name = "otcat">
 <div class="container" style = "width: 100vw; padding: none; margin: 0; ">
   <div class="panel panel-default" style = "  background-color: transparent; border: none;">
@@ -319,65 +382,65 @@ color:  #00e6b8;
 	 </div>
       <div class="panel-body" style = "  background-color: transparent; min-height:55vh; max-height:55vh; overflow: auto; border:none">{{>idealist}}</div>
       <div class="panel-footer" style = "  background-color: transparent;padding-bottom:none; border: none; margin-left:-7.5%">{{>addideaform}} </div>
-  </div>
-</div>
-</template>
+   </div>
+ </div>
+ </template>
+
+
+
 
 
 <template name = "idea">
-
 	<div id = "{{_id}}"> 
-	 <h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h1>
-	<h4 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">  {{idea_desc}}</h4><br>
+		<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h1>
+		<h4 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">  {{idea_desc}}</h4><br>
 	</div>
-
-
 	<div>
 		<a href = "/odcat"><button class = "btn btn-success"> back to ideas</button></a>
 	</div>
 </template>
 
-<template name = "addideaform">
-<!-- <div> -->
-	<!-- <form class = "js-add-idea" style = "padding-bottom:none; padding-left:5%;text-align: center;"> -->
-		<!-- <p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 2vw;">Add an Idea:</p> -->
-		<!-- <div><p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Title: </p><input type = "text" name = "idea_title" style = "width:15%"/>  -->
-		<!-- <p style = "color: white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Description: </p><input type = "text" name = "idea_desc" style = "width:30%; height; 25%;"/> -->
-		<!-- <button class = "btn btn-success "> Save </button> </div> -->
-	<!-- </form> -->
-	<!-- </div> -->
-		 
+
+
+
+
+<template name = "addideaform">		 
 	 <div class="row">
-			  <div>
+		<form class = "js-add-idea" style = "padding-bottom:none; padding-left:5%;">
 				<div>
-                    <span>
-                        <p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 2vw;margin-left:10%">Add an Idea:</p>
-                    </span>
+                        <p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 2vw;margin-left:10%">Add an Idea:</p>             
                  </div>
-            </div>
 			<div class = "col-md-2 col-xs-2" style="padding:0px 0px 0px 0px; margin-left: 10%;">
-                <p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Title: </p><input type = "text" name = "idea_title" style = "width:100%"/> 
-             </div>
-             <div class = "col-md-5 col-xs-5" style="height: 40px; padding: 0px 0px 0px 0px;margin-left: 10%;">
-				<div>
-                    <span>
-                       <p style = "color: white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Description: </p><input type = "text" name = "idea_desc" style = "width:90%; "/>
-						<button class = "btn btn-success "> Save </button> 
-                     </span>
-                </div>
+                <p style = "color:white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Title: </p>
+					<input type = "text" name = "idea_title" style = "width:100%"/> 
             </div>
-         </div>
-	
+            <div class = "col-md-5 col-xs-5" style=" padding: 0px 0px 0px 0px ; margin-left: 10%;">
+                        <p style = "color: white; font-family: Courier New, Courier, monospace;font-size: 1vw;">Description: </p>
+							<input type = "text" name = "idea_desc" style = "width:90%; "/>
+							<button class = "btn btn-success "> Save </button>                     
+            </div>
+		</form>
+     </div>	
 </template>
+
+
+
+
 
 <template name = "idealist">
 	{{#each outdoorideas}} 
 		<div id = "{{_id}}">
 			<a href = "/idea/{{_id}}"><h2 style = "color:white; font-family: Courier New, Courier, monospace;"> {{idea_title}}</h2></a>
-			<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{idea_desc}}</h4><br><br>
+			<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{idea_desc}}</h4>
+			<div>{{>starsRating mutable=true class="js-rate-idea" id=_id}}</div> 
+			<br><br>
+			 
 		</div>
 	{{/each}}
 </template>
+
+
+
 
 <template name = "profile">
 

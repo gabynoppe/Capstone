@@ -22,9 +22,27 @@ import './main.html';
 
 }) */
 
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Global variables//
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 var myId; // global id variable used to get each idea loaded for its own page
+
+
+
+
 	
-	///routing
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Routing
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	Router.configure({
 		layoutTemplate: 'ApplicationLayout'
 	});
@@ -114,7 +132,19 @@ var myId; // global id variable used to get each idea loaded for its own page
 			to: "main"
 		});			
 	});
+	
+	
 
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Events and helper functions//
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
    //Template.addideaform.helpers({outdoorideas:idea_title});
 	
 	Template.idea.helpers({ // edit this ? to make idea route render the correct idea values
@@ -126,45 +156,35 @@ var myId; // global id variable used to get each idea loaded for its own page
     //return OutdoorIdeas.find();
   },
   
-   entertainmentideas: function() {
-	     
-	var test = EntertainmentIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  },
+  /////////////////////////////////////////////////////////////////////
+  //These will be needed when I enable the other collections/categories
+  /////////////////////////////////////////////////////////////////////
   
-   culturallearningideas: function() {
-	     
-	var test = CulturalLearningIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  },
+   // entertainmentideas: function() {	     
+	// var test = EntertainmentIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+
+  // },
   
-   groupfunideas: function() {
-	     
-	var test = GroupFunIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  },
+   // culturallearningideas: function() {	     
+	// var test = CulturalLearningIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+
+  // },
   
-   foodideas: function() {
-	     
-	var test = FoodIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  },
+   // groupfunideas: function() {	     
+	// var test = GroupFunIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+
+  // },
   
-   otherideas: function() {
-	     
-	var test = OtherIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  },
+   // foodideas: function() {	     
+	// var test = FoodIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+
+  // },
+  
+   // otherideas: function() {	     
+	// var test = OtherIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+
+  // },
+  
   columns: function() {
 
 	  var result1 = _.values(this.idea_title);
@@ -174,30 +194,37 @@ var myId; // global id variable used to get each idea loaded for its own page
   
 	});
       
+  ///////////////////////////////////////////////////////////////////////////////
+  ////returns the list of ideas belonging to that collection (to be displayed)///
+  ///////////////////////////////////////////////////////////////////////////////
 	Template.idealist.helpers({
   outdoorideas: function() {
     return OutdoorIdeas.find();
   },
   
-  entertainmentideas: function() {
-    return EntertainmentIdeas.find();
-  },
+  ////////////////////////////////////////////////////////////////////////
+  ////These will be for when I finish adding the other idea collections///
+  ////////////////////////////////////////////////////////////////////////
   
-  culturallearningideas: function() {
-    return CulturalLearnigIdeas.find();
-  },
+  // entertainmentideas: function() {
+    // return EntertainmentIdeas.find();
+  // },
   
- groupfunideas: function() {
-    return GroupFunIdeas.find();
-  },
+  // culturallearningideas: function() {
+    // return CulturalLearnigIdeas.find();
+  // },
   
- foodideas: function() {
-    return FoodIdeas.find();
-  },
+ // groupfunideas: function() {
+    // return GroupFunIdeas.find();
+  // },
   
-  otherideas: function() {
-    return OtherIdeas.find();
-  },
+ // foodideas: function() {
+    // return FoodIdeas.find();
+  // },
+  
+  // otherideas: function() {
+    // return OtherIdeas.find();
+  // },
   
   
   columns: function() {
@@ -206,6 +233,12 @@ var myId; // global id variable used to get each idea loaded for its own page
 	  return result1, result2;
   }
 	});
+	
+	
+    //////////////////////////////////////////////////////////////////////////////////////
+	// function that works with the form to add an idea to the database and help display it
+	//////////////////////////////////////////////////////////////////////////////////////
+	
       Template.addideaform.events({
 		'submit .js-add-idea': function (event){
 			var idea_title, idea_desc;
@@ -213,16 +246,21 @@ var myId; // global id variable used to get each idea loaded for its own page
 			idea_desc = event.target.idea_desc.value;
 			console.log("title: "+idea_title+" desc:"+idea_desc);
 			
+			
 			OutdoorIdeas.insert({
 				idea_title:idea_title,
 				idea_desc:idea_desc,
 				createdOn:new Date()
 				
 			});
+			reset();       ///////////clears/resets the form on after submit
 			return false;
 		}
 	});
 	
+    //////////////////////////////////////////////////////////////////////
+	// allows a 'username' category when signing in and creating a profile
+	//////////////////////////////////////////////////////////////////////
 	Accounts.ui.config ({
 		passwordSignupFields: "USERNAME_AND_EMAIL"
 	});
@@ -238,40 +276,48 @@ var myId; // global id variable used to get each idea loaded for its own page
 	}
 	
 	});
-	
+
+	////////////////////////////////
+	// if user is not logged in, and they try to access "profile" they will get an alert saying that they need to sign in.//
+	////////////////////////////////
+	Template.navbar.events({
+		'click .signinalert':function(){
+		if (!Meteor.user()){
+			return alert("You must sign in to view your profile.");
+		}
+		}
+	  });
+	  
+	///////////////////////////////////////////////////////////////
+	// Only allows the user to follow the 'profile' link to access their profile if they are signed in... 
+    ///////////////////////////////////////////////////////////////	
 	Template.navbar.helpers({
+		
 	profile:function(){
 		var isprof;
 		if (Meteor.user()){
-			
+		
 	isprof = "/profile";
     } else {
-    isprof = "#";
+		
+		isprof = "#";		
     }
 	return isprof;
 	}
   });
-	// Template.body.helpers({profile:function(){
-		
-		// 'click .profile':function(event){
-		// if (Meteor.user){
-			//return Meteor.user().username;
-			//return Meteor.user().emails[0].address;
-		// }
-		// else {
-			// return "#";
-		// }
+  ///////////// need to save the rating....not saving for some reason  /////////////////////
+     Template.idealist.events({
+		'click .js-rate-idea':function(event){
+		  var rating = $(event.currentTarget).data("userrating");
+		  console.log(rating);
+		  var idea_id = this.id;
+		  console.log(idea_id);
 
-	// function profile(){
-		// if (Meteor.user()){
-			// return "/profile"
-		//	return Meteor.user().username;
-			//return Meteor.user().emails[0].address;
-		// }
-		// else {
-			// return "#";  document.getElementById("myprofile").href="/profile"; 
-		// }
-	// }
+		  OutdoorIdeas.update({_id:idea_id}, 
+						{$set: {rating:rating}});
+		
+		}
+  });
 	
 	
 
