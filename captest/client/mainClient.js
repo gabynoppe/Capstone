@@ -30,7 +30,7 @@ import './main.html';
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var myId; // global id variable used to get each idea loaded for its own page
+//var myId; // global id variable used to get each idea loaded for its own page
 
 
 
@@ -59,72 +59,41 @@ var myId; // global id variable used to get each idea loaded for its own page
 		});		
 	});
 	
-	Router.route('/odcat', function () {
+	// The user clicked on a menu item such as href="/category/odcat"
+	Router.route('/category/:categoryPathParam', function () {
 		this.render('navbar', {
 			to: "navbar"
-		});
-		this.render('odcat', {
-			to: "main"
+			});
+		this.render('categoryPageTemplate', 
+		{ 
+			to: "main",
+			data: function() {
+				return this.params.categoryPathParam;
+			}
 		});			
 	});
 	
-	Router.route('/encat', function () {
-		this.render('navbar', {
-			to: "navbar"
-		});
-		this.render('encat', {
-			to: "main"
-		});			
-	});
-	
-	Router.route('/clcat', function () {
-		this.render('navbar', {
-			to: "navbar"
-		});
-		this.render('clcat', {
-			to: "main"
-		});			
-	});
-	
-	Router.route('/gfcat', function () {
-		this.render('navbar', {
-			to: "navbar"
-		});
-		this.render('gfcat', {
-			to: "main"
-		});			
-	});
-	
-	Router.route('/fcat', function () {
-		this.render('navbar', {
-			to: "navbar"
-		});
-		this.render('fcat', {
-			to: "main"
-		});			
-	});
-	Router.route('/otcat', function () {
-		this.render('navbar', {
-			to: "navbar"
-		});
-		this.render('otcat', {
-			to: "main"
-		});			
-	});
-		Router.route('/idea/:_id', function () { //takes you to the specific idea in the list
+
+	Router.route('/idea/:_id', function () { //takes you to the specific idea in the list
 		this.render('navbar', {
 			to: "navbar"
 		});
 		this.render('idea', {
 			to: "main",
 			data: function(){
-				 myId = this.params._id; 
-				return OutdoorIdeas.findOne({_id:this.params._id});
-			}
-		});			
+				// myId = this.params._id; 
+				return Ideas.findOne({ ////////////////////////////change collection
+					// $and: [
+					// {_id:this.params._id},
+					// {ideaCategory:this.params.categoryPathParam}
+					// ]
+				_id:this.params._id
+				});
+			}	
+		});
 	});
 
-		Router.route('/profile', function () {
+	Router.route('/profile/:profileUserName', function () {
 		this.render('navbar', {
 			to: "navbar"
 		});
@@ -132,7 +101,8 @@ var myId; // global id variable used to get each idea loaded for its own page
 			to: "main"
 		});			
 	});
-	
+		
+		
 	
 
 	
@@ -142,96 +112,117 @@ var myId; // global id variable used to get each idea loaded for its own page
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
+	//this function on the categoryPage template, can be used to pull the path (e.g. /odcat, or /encat, etc.)
+	Template.categoryPageTemplate.helpers({
+			categoryPathHelper: function() {
+				return this.toString(); //Return the categoryPath value such as he path (e.g. /odcat, or /encat, etc.) 
+			}, 
+			categoryNameHelper: function() {
+				switch (this.toString()) {
+					case "odcat":
+						return "Outdoors";
+						
+					case "encat":
+						return "Entertainment";
+						
+					case "clcat":
+						return "Cultural and Learning";
+						
+					case "gfcat":
+						return "Group Fun";
+						
+					case "fcat":
+						return "Food";
+						
+					case "otcat":
+						return  "Other";	
+					
+				}
+
+			},
+			glyphIconHelper: function() {
+				switch (this.toString()) {
+					case "odcat":
+						return " glyphicon glyphicon-tree-deciduous";
+						
+					case "encat":
+						return "glyphicon glyphicon-star";
+						
+					case "clcat":
+						return "glyphicon glyphicon-globe";
+						
+					case "gfcat":
+						return "glyphicon glyphicon-user";
+						
+					case "fcat":
+						return "glyphicon glyphicon-cutlery";
+						
+					case "otcat":
+						return  "glyphicon glyphicon-asterisk";	
+					
+				}
+			},
+			glyphColorHelper: function() {
+				switch (this.toString()) {
+					case "odcat":
+						return "#00cc00";
+						
+					case "encat":
+						return "#ffff1a";
+						
+					case "clcat":
+						return "#1a8cff";
+						
+					case "gfcat":
+						return "#b300b3";
+						
+					case "fcat":
+						return "#ff5c33";
+						
+					case "otcat":
+						return  "#00e6b8";	
+					
+				}
+			}
+	});
 	
 	
    //Template.addideaform.helpers({outdoorideas:idea_title});
 	
-	Template.idea.helpers({ // edit this ? to make idea route render the correct idea values
-  outdoorideas: function() {
+	//Template.idea.helpers({ // edit this ? to make idea route render the correct idea values
+	//oneIdeaHelper: function(categoryPathParam) {
 	     
-	var test = OutdoorIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+	//var test = Ideas.findOne(
+	//	{
+	//		$and: [
+	//			{_id:myId},
+	//			{ideaCategory:categoryPathParam}
+	//			]
+	//	}
+	//)
+		
+					//_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
 	// return test;
 	  //console.log("title: "+idea_title+" desc:"+idea_desc);
     //return OutdoorIdeas.find();
-  },
-  
-  /////////////////////////////////////////////////////////////////////
-  //These will be needed when I enable the other collections/categories
-  /////////////////////////////////////////////////////////////////////
-  
-   // entertainmentideas: function() {	     
-	// var test = EntertainmentIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
+  //}
+  //,
+  //columns: function() {
 
-  // },
+	//  var result1 = _.values(this.idea_title);
+	//  var result2 = _.values(this.idea_desc);
+	//  return result1, result2;
+  //}
   
-   // culturallearningideas: function() {	     
-	// var test = CulturalLearningIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-
-  // },
-  
-   // groupfunideas: function() {	     
-	// var test = GroupFunIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-
-  // },
-  
-   // foodideas: function() {	     
-	// var test = FoodIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-
-  // },
-  
-   // otherideas: function() {	     
-	// var test = OtherIdeas.findOne({_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-
-  // },
-  
-  columns: function() {
-
-	  var result1 = _.values(this.idea_title);
-	  var result2 = _.values(this.idea_desc);
-	  return result1, result2;
-  }
-  
-	});
+	//});
       
   ///////////////////////////////////////////////////////////////////////////////
   ////returns the list of ideas belonging to that collection (to be displayed)///
   ///////////////////////////////////////////////////////////////////////////////
 	Template.idealist.helpers({
-  outdoorideas: function() {
-    return OutdoorIdeas.find();
-  },
-  
-  ////////////////////////////////////////////////////////////////////////
-  ////These will be for when I finish adding the other idea collections///
-  ////////////////////////////////////////////////////////////////////////
-  
-  // entertainmentideas: function() {
-    // return EntertainmentIdeas.find();
-  // },
-  
-  // culturallearningideas: function() {
-    // return CulturalLearnigIdeas.find();
-  // },
-  
- // groupfunideas: function() {
-    // return GroupFunIdeas.find();
-  // },
-  
- // foodideas: function() {
-    // return FoodIdeas.find();
-  // },
-  
-  // otherideas: function() {
-    // return OtherIdeas.find();
-  // },
-  
-  
-  columns: function() {
-	  var result1 = _.values(this.idea_title);
-	  var result2 = _.values(this.idea_desc);
-	  return result1, result2;
-  }
+	ideasHelper: function(categoryPathParam) {
+    return Ideas.find({"ideaCategory":categoryPathParam}); //Filter for categoryPath
+	}
 	});
 	
 	
@@ -240,16 +231,12 @@ var myId; // global id variable used to get each idea loaded for its own page
 	//////////////////////////////////////////////////////////////////////////////////////
 	
       Template.addideaform.events({
-		'submit .js-add-idea': function (event){
-			var idea_title, idea_desc;
-			idea_title = event.target.idea_title.value;
-			idea_desc = event.target.idea_desc.value;
-			console.log("title: "+idea_title+" desc:"+idea_desc);
-			
-			
-			OutdoorIdeas.insert({
-				idea_title:idea_title,
-				idea_desc:idea_desc,
+		'submit .addIdeaEvent': function (event, template){
+
+			Ideas.insert({
+				ideaCategory:template.data.categoryPathParam,   // this catches the parameter we passes in the template and has the value of the collection ideaCategory we are in
+				ideaTitle:event.target.ideaTitleInput.value,
+				ideaDesc:event.target.ideaDescInput.value,
 				createdOn:new Date()
 				
 			});
@@ -261,13 +248,13 @@ var myId; // global id variable used to get each idea loaded for its own page
     //////////////////////////////////////////////////////////////////////
 	// allows a 'username' category when signing in and creating a profile
 	//////////////////////////////////////////////////////////////////////
-	Accounts.ui.config ({
-		passwordSignupFields: "USERNAME_AND_EMAIL"
-	});
+	// Accounts.ui.config ({
+		// passwordSignupFields: "USERNAME_AND_EMAIL"
+	// });
 	
-	Template.body.helpers({username:function(){
+	Template.welcome.helpers({myUserName:function(){
 		if (Meteor.user()){
-			//return Meteor.user().username;
+			return Meteor.user().username;
 			//return Meteor.user().emails[0].address;
 		}
 		else {
@@ -297,7 +284,7 @@ var myId; // global id variable used to get each idea loaded for its own page
 		var isprof;
 		if (Meteor.user()){
 		
-	isprof = "/profile";
+	isprof = "/profile/" + Meteor.user().username;
     } else {
 		
 		isprof = "#";		
