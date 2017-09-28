@@ -146,8 +146,8 @@ color:  #00e6b8;
 <template name = "welcome">
 	<div class = "container">	
 		<div class = "jumbotron">
-			<h1 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Welcome To FunCity {{myUserName}}</h1>  <!--CAN ADD USER NAME HERE TO PERSONALIZE-->
-			<h3 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Click on a category to start browsing ideas!</h3>
+			<h1 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Welcome To FunCity</h1> 
+			<h3 style = "text-align:center; color: #29293d; font-family: Courier New, Courier, monospace;"> Click on a category to start browsing ideas of fun things to do!</h3>
 		</div>
 	</div>
 </template>
@@ -163,9 +163,9 @@ color:  #00e6b8;
 				<li class="active"> <a class="navbar-brand" href="/"  style = " font-size: 1.5vw; ">FunCity</a></li>
 			</div>
 			<ul class="nav navbar-nav"></ul>
-			<ul class="nav navbar-nav navbar-right" style = "padding-right:0%">
+			<ul class="nav navbar-nav navbar-right" style = "padding-right:5%">
 				<li style = "padding-right:0%" ><a href="#">{{>loginButtons}}<span class="glyphicon glyphicon-user" style = " font-size: 1vw; "></span> </a></li>
-				<li style = "padding-left:15%; padding-right:15%"><a href="{{profile}}" id = "profilelink" class = "signinalert" >Profile</a></li>
+				<li style = "padding-left:5%; padding-right:35%"><a href="{{profile}}" id = "profilelink" class = "signinalert" >Profile</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -255,7 +255,7 @@ color:  #00e6b8;
 		<div id = "{{_id}}">
 			<a href = "/idea/{{_id}}"><h2 style = "color:white; font-family: Courier New, Courier, monospace;"> {{ideaTitle}}</h2></a>
 			<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{ideaDesc}}</h4>
-			<div>{{>starsRating mutable=true class="js-rate-idea" id=_id}}</div> 
+			<div>{{>starsRating mutable=true class="rateIdeaEvent" id=_id}}</div> 
 			<br><br>
 			 
 		</div>

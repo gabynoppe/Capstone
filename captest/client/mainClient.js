@@ -294,14 +294,29 @@ import './main.html';
   });
   ///////////// need to save the rating....not saving for some reason  /////////////////////
      Template.idealist.events({
-		'click .js-rate-idea':function(event){
-		  var rating = $(event.currentTarget).data("userrating");
-		  console.log(rating);
-		  var idea_id = this.id;
-		  console.log(idea_id);
+		'click .saveIdeaEvent':function(event){
+		//TODO: Implement a save button and save to profileIdeas.... 
+			// ProfileIdeas.insert({idea_id:this._id}, {userName:Meteor.user().username})
+		//TODO: Implement the profile page, and let it read all my saved Ideas
+			// ProfileIdeas.find({userName:Meteor.user().username})
+		//TODO: On the profile page add the delete button and functionality
+		//TODO: When they click an idea on my profile Page, send them to the idea page (same one as we used before)
+			// Remember to send idea_id from the profileIdeas collection, as the _id on the ideas collection.
+		//TODO: On the profile page add the rating buttons next each idea
+		//TG: Use the set capability to ProfileIdeas.update the ratings field
+		
+		
+		 // console.log(rating);
+		 // var idea_id = this.id;
+		 // console.log(idea_id);
 
-		  OutdoorIdeas.update({_id:idea_id}, 
-						{$set: {rating:rating}});
+		 //var rating = $(event.currentTarget).data("userrating");
+		  
+		 // ProfileIdeas.insert(
+			//{idea_id:this._id}, 
+			//{rating_id:this._id},
+			//{userName:Meteor.user().username},
+			//{$set: {rating:rating}});
 		
 		}
   });
