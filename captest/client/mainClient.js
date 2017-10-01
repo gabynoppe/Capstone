@@ -4,36 +4,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 
-/* OutdoorIdeas.allow({
-	insert:function(userId, doc){
-		if (Meteor.user()){ //user is logged in
-			odidea.createdBy = userId;//outdoor idea, force idea to be owned by user
-			if (userId != odidea.createdBY){
-				return false; //no user messing around
-			}
-			else { //user is looged in with correct id
-				return true;
-			}
-		}
-		else //{//user not logged in
-			return false;
-		//}
-	}
-
-}) */
-
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Global variables//
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//var myId; // global id variable used to get each idea loaded for its own page
-
-
-
 
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,24 +51,23 @@ import './main.html';
 		this.render('idea', {
 			to: "main",
 			data: function(){
-				// myId = this.params._id; 
-				return Ideas.findOne({ ////////////////////////////change collection
-					// $and: [
-					// {_id:this.params._id},
-					// {ideaCategory:this.params.categoryPathParam}
-					// ]
+				return Ideas.findOne({
 				_id:this.params._id
 				});
 			}	
 		});
 	});
 
-	Router.route('/profile/:profileUserName', function () {
+	Router.route('/profile/:profileUserNameParam', function () { //takes user to their specific profile
 		this.render('navbar', {
 			to: "navbar"
 		});
-		this.render('profile', {
-			to: "main"
+		this.render('profilePage', {
+			to: "main",
+			data: function(){
+				return this.params.profileUserNameParam;
+			}	
+
 		});			
 	});
 		
@@ -187,54 +156,51 @@ import './main.html';
 	});
 	
 	
-   //Template.addideaform.helpers({outdoorideas:idea_title});
-	
-	//Template.idea.helpers({ // edit this ? to make idea route render the correct idea values
-	//oneIdeaHelper: function(categoryPathParam) {
-	     
-	//var test = Ideas.findOne(
-	//	{
-	//		$and: [
-	//			{_id:myId},
-	//			{ideaCategory:categoryPathParam}
-	//			]
-	//	}
-	//)
-		
-					//_id:myId});   // myId = global id variable to pass the id of the page we selected....this._Id doesnt work....
-	// return test;
-	  //console.log("title: "+idea_title+" desc:"+idea_desc);
-    //return OutdoorIdeas.find();
-  //}
-  //,
-  //columns: function() {
 
-	//  var result1 = _.values(this.idea_title);
-	//  var result2 = _.values(this.idea_desc);
-	//  return result1, result2;
-  //}
-  
-	//});
       
   ///////////////////////////////////////////////////////////////////////////////
   ////returns the list of ideas belonging to that collection (to be displayed)///
   ///////////////////////////////////////////////////////////////////////////////
 	Template.idealist.helpers({
-	ideasHelper: function(categoryPathParam) {
-    return Ideas.find({"ideaCategory":categoryPathParam}); //Filter for categoryPath
+
+		ideasHelper: function(categoryPathParam) {
+
+		return Ideas.find({"ideaCategory":categoryPathParam}); //Filter for categoryPath
 	}
 	});
 	
+	Template.profilePage.events({
+		'click .rateIdeaEvent': function(event){
+			var rating = $(event.currentTarget).data("userrating");	
+			ProfileIdeas.update({_id:event.currentTarget.id}, 
+                    {$set: {profileIdeaRating:rating}});
+		}
+	});
+	
+	Template.profilePage.helpers({
+		
+		profileIdeaHelper: function(profileUserNameParam) {
+		return ProfileIdeas.find({"ideaUsername":profileUserNameParam}); //Filter for userName
+		
+	},
+	 getProfileName: function(){	 		
+		return Meteor.user().username;
+	 }, 
+	 profileTitleDescHelper:function(ideaId){
+		 return Ideas.find({_id:ideaId});
+		 
+	 }
+	});
 	
     //////////////////////////////////////////////////////////////////////////////////////
 	// function that works with the form to add an idea to the database and help display it
 	//////////////////////////////////////////////////////////////////////////////////////
 	
-      Template.addideaform.events({
+     Template.addideaform.events({
 		'submit .addIdeaEvent': function (event, template){
 
 			Ideas.insert({
-				ideaCategory:template.data.categoryPathParam,   // this catches the parameter we passes in the template and has the value of the collection ideaCategory we are in
+				ideaCategory:template.data.categoryPathParam,   // this catches the parameter passed in the template and has the value of the collection ideaCategory we are in
 				ideaTitle:event.target.ideaTitleInput.value,
 				ideaDesc:event.target.ideaDescInput.value,
 				createdOn:new Date()
@@ -248,14 +214,13 @@ import './main.html';
     //////////////////////////////////////////////////////////////////////
 	// allows a 'username' category when signing in and creating a profile
 	//////////////////////////////////////////////////////////////////////
-	// Accounts.ui.config ({
-		// passwordSignupFields: "USERNAME_AND_EMAIL"
-	// });
+	Accounts.ui.config ({
+		passwordSignupFields: "USERNAME_AND_EMAIL"
+	});
 	
 	Template.welcome.helpers({myUserName:function(){
 		if (Meteor.user()){
 			return Meteor.user().username;
-			//return Meteor.user().emails[0].address;
 		}
 		else {
 			return "";
@@ -274,13 +239,17 @@ import './main.html';
 		}
 		}
 	  });
-	  
+	 Template.profilePage.events({
+		'click .deleteProfileIdeaEvent':function(event){
+			ProfileIdeas.remove({_id:this._id})
+		} 
+	 });
 	///////////////////////////////////////////////////////////////
 	// Only allows the user to follow the 'profile' link to access their profile if they are signed in... 
     ///////////////////////////////////////////////////////////////	
 	Template.navbar.helpers({
 		
-	profile:function(){
+	profileHelper:function(){
 		var isprof;
 		if (Meteor.user()){
 		
@@ -292,35 +261,43 @@ import './main.html';
 	return isprof;
 	}
   });
-  ///////////// need to save the rating....not saving for some reason  /////////////////////
-     Template.idealist.events({
-		'click .saveIdeaEvent':function(event){
-		//TODO: Implement a save button and save to profileIdeas.... 
-			// ProfileIdeas.insert({idea_id:this._id}, {userName:Meteor.user().username})
-		//TODO: Implement the profile page, and let it read all my saved Ideas
-			// ProfileIdeas.find({userName:Meteor.user().username})
-		//TODO: On the profile page add the delete button and functionality
-		//TODO: When they click an idea on my profile Page, send them to the idea page (same one as we used before)
-			// Remember to send idea_id from the profileIdeas collection, as the _id on the ideas collection.
-		//TODO: On the profile page add the rating buttons next each idea
-		//TG: Use the set capability to ProfileIdeas.update the ratings field
-		
-		
-		 // console.log(rating);
-		 // var idea_id = this.id;
-		 // console.log(idea_id);
 
-		 //var rating = $(event.currentTarget).data("userrating");
-		  
-		 // ProfileIdeas.insert(
-			//{idea_id:this._id}, 
-			//{rating_id:this._id},
-			//{userName:Meteor.user().username},
-			//{$set: {rating:rating}});
-		
+     Template.idea.events({
+		'click .saveIdeaEvent':function(event){
+			var checkIfIdeaExists = ProfileIdeas.findOne(
+			{$and: [
+				{ideaId:this._id},
+				{ideaUsername:event.currentTarget.id}
+				
+				]
+				}
+			);
+			if(typeof(checkIfIdeaExists) == "undefined" ) {
+				//if( checkIfIdeaExists.length == 0  ) {
+				ProfileIdeas.insert(
+				{
+					ideaId:this._id,
+					ideaUsername: event.currentTarget.id	
+				}					
+				);
+			} else 
+			{
+				return alert ("You've previously saved this idea");
+			}
+		},
+	  'click. takeBackEvent':function(event) { 
+			window.history.back();		
 		}
+
+	});
+ 
+  
+  Template.idea.helpers({
+	  getUserNameHelper:function(){
+		  return Meteor.user().username;
+	  }
   });
-	
+
 	
 
 

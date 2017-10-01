@@ -165,7 +165,7 @@ color:  #00e6b8;
 			<ul class="nav navbar-nav"></ul>
 			<ul class="nav navbar-nav navbar-right" style = "padding-right:5%">
 				<li style = "padding-right:0%" ><a href="#">{{>loginButtons}}<span class="glyphicon glyphicon-user" style = " font-size: 1vw; "></span> </a></li>
-				<li style = "padding-left:5%; padding-right:35%"><a href="{{profile}}" id = "profilelink" class = "signinalert" >Profile</a></li>
+				<li style = "padding-left:0%; padding-right:35%"><a href="{{profileHelper}}" id = "profilelink" class = "signinalert" >Profile</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -214,12 +214,13 @@ color:  #00e6b8;
 
 <template name = "idea">
 	<div id = "{{_id}}"> 
-		<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{ideaTitle}}</h1>
+		<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;"> {{ideaTitle}}</h1><br><br><br>
 		<h4 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">  {{ideaDesc}}</h4><br>
 	</div>
-	<!-- <div> -->
-		<!-- <a href = "/odcat"><button class = "btn btn-success"> back to ideas</button></a> -->
-	<!-- </div> -->
+	
+	    <button class = "btn btn-success saveIdeaEvent" id ="{{getUserNameHelper}}"> Save this idea to profile</button>
+		<!--<button class = "btn btn-success takeBackEvent"> back to ideas</button> -->
+	
 </template>
 
 
@@ -254,8 +255,8 @@ color:  #00e6b8;
 	{{#each ideasHelper categoryPathParam}} 
 		<div id = "{{_id}}">
 			<a href = "/idea/{{_id}}"><h2 style = "color:white; font-family: Courier New, Courier, monospace;"> {{ideaTitle}}</h2></a>
-			<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{ideaDesc}}</h4>
-			<div>{{>starsRating mutable=true class="rateIdeaEvent" id=_id}}</div> 
+			<!--<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{ideaDesc}}</h4> -->
+			 
 			<br><br>
 			 
 		</div>
@@ -265,11 +266,21 @@ color:  #00e6b8;
 
 
 
-<template name = "profile">
-
-	<div >
-	<h1 style = "color:white"> {{profileUserName}}</h1>
-	</div>
+<template name = "profilePage">
+<h1 style = "color:white; text-align:center; font-family: Courier New, Courier, monospace;">My Ideas</h1>
+	{{#each profileIdeaHelper getProfileName}} 
+		<div>
+			{{#each profileTitleDescHelper ideaId}}
+				<a href = "/idea/{{_id}}" style = "color:white">
+					<h2 style = "color:white; font-family: Courier New, Courier, monospace;">{{ideaTitle}}</h2>
+					<h4 style = "color:white; font-family: Courier New, Courier, monospace;">  &emsp;{{ideaDesc}}</h4>
+				</a>
+			{{/each}}
+			<div>{{>starsRating rating=profileIdeaRating mutable=true class="rateIdeaEvent" id=_id}}</div> 
+			<button class = "btn btn-warning deleteProfileIdeaEvent"> Remove from profile</button>
+			<br><br>	 
+		</div>
+	{{/each}}
 
 </template>
 
